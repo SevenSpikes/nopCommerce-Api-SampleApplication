@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "Layout.cshtml";
+}
+
+<div>
+    @using (Html.BeginRouteForm("Submit", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>
+                    <label for="serverUrl">Server url</label>
+                </td>
+                <td>
+                    <input name="serverUrl" type="text" id="serverUrl" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="clientId">Client Id</label>
+                </td>
+                <td>
+                    <input name="clientId" type="text" id="clientId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="clientSecret">Client Secret</label>
+                </td>
+                <td>
+                    <input name="clientSecret" type="text" id="clientSecret" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="redirectUrl">Redirect Url</label>
+                </td>
+                <td>
+                    <input name="redirectUrl" type="text" id="redirectUrl" value="@Url.RouteUrl("GetAccessToken", null, Request.Url.Scheme)" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Get Access Token" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
