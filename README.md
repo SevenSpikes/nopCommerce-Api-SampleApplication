@@ -1,0 +1,1 @@
+# nopCommerce-Api-Authorization
