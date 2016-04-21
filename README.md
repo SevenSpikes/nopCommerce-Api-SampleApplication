@@ -6,7 +6,7 @@ In this sample project we have demonstrated how clients can authorize and obtain
 
 The standard Authorization Code Grant flow is described in [Section 4.1](http://tools.ietf.org/html/rfc6749#section-4.1) of the The OAuth 2.0 Authorization Framework.
 
-### Here is how the Authorization Code Grant Flow works in nopCommerce Web API.
+#### Here is how the Authorization Code Grant Flow works in nopCommerce Web API.
 
 ![Authorization Code Grant Flow Diagram](https://github.com/SevenSpikes/nopCommerce-Api-Authorization/blob/master/diagram.jpg "Authorization Code Grant Flow Diagram")
 
