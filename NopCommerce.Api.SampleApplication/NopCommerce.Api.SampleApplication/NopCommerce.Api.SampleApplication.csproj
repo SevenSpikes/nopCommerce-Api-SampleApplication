@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9F0AF292-A86C-4526-A8B3-C61C825153A9}</ProjectGuid>
+    <ProjectGuid>{7E7B592E-6B42-4819-B6C0-1FF0FF3CE47B}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nop.Api.Authorization</RootNamespace>
-    <AssemblyName>Nop.Api.Authorization</AssemblyName>
+    <RootNamespace>NopCommerce.Api.SampleApplication</RootNamespace>
+    <AssemblyName>NopCommerce.Api.SampleApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -127,7 +127,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
-    <Compile Include="DTOs\AuthParameters.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="DTOs\CustomerApi.cs" />
+    <Compile Include="DTOs\CustomersRootObject.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,14 +137,19 @@
     <Compile Include="Models\AccessModel.cs" />
     <Compile Include="Models\AuthorizationModel.cs" />
     <Compile Include="Models\UserAccessModel.cs" />
+    <Compile Include="Parameters\AuthParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Layout.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\AccessToken.cshtml" />
-    <Content Include="Views\Layout.cshtml" />
+    <Content Include="Views\Customers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -152,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NopCommerce.Api.AdapterLibrary\NopCommerce.Api.AdapterLibrary.csproj">
+      <Project>{0F2BD838-3884-4DD8-AB8F-B7B449AA7164}</Project>
+      <Name>NopCommerce.Api.AdapterLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -166,9 +179,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54982</DevelopmentServerPort>
+          <DevelopmentServerPort>49675</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54982/</IISUrl>
+          <IISUrl>http://localhost:49675/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

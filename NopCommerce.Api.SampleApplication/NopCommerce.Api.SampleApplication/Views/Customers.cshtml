@@ -1,0 +1,12 @@
+﻿@model NopCommerce.Api.SampleApplication.DTOs.CustomersRootObject
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<ul>
+    @foreach (var customer in Model.Customers)
+    {
+        <li>@customer.FirstName @customer.LastName</li>     
+    }
+</ul>

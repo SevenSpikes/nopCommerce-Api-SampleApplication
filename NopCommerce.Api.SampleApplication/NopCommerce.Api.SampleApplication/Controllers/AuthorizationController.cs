@@ -2,11 +2,11 @@
 using System.Net;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using Nop.Api.Authorization.DTOs;
-using Nop.Api.Authorization.Managers;
-using Nop.Api.Authorization.Models;
+using NopCommerce.Api.SampleApplication.Managers;
+using NopCommerce.Api.SampleApplication.Models;
+using NopCommerce.Api.SampleApplication.Parameters;
 
-namespace Nop.Api.Authorization.Controllers
+namespace NopCommerce.Api.SampleApplication.Controllers
 {
     public class AuthorizationController : Controller
     {
@@ -33,15 +33,15 @@ namespace Nop.Api.Authorization.Controllers
                         return BadRequest();
                     }
 
-                    // TODO: For now the data is saved into the TempData, but in production environment you should replace it with your database.
-                    TempData["clientId"] = model.ClientId;
-                    TempData["clientSecret"] = model.ClientSecret;
-                    TempData["serverUrl"] = model.ServerUrl;
-                    TempData["redirectUrl"] = redirectUrl;
+                    // TODO: For now the data is saved into the current Session, but in production environment you should replace it with your database.
+                    Session["clientId"] = model.ClientId;
+                    Session["clientSecret"] = model.ClientSecret;
+                    Session["serverUrl"] = model.ServerUrl;
+                    Session["redirectUrl"] = redirectUrl;
 
                     // This should not be saved anywhere.
                     var state = Guid.NewGuid();
-                    TempData["state"] = state;
+                    Session["state"] = state;
 
                     string authUrl = nopAuthorizationManager.BuildAuthUrl(redirectUrl, new string[] { }, state.ToString());
 
@@ -62,7 +62,7 @@ namespace Nop.Api.Authorization.Controllers
         {
             if (ModelState.IsValid && !string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(state))
             {
-                if (state != TempData["state"].ToString())
+                if (state != Session["state"].ToString())
                 {
                     return BadRequest();
                 }
@@ -71,18 +71,18 @@ namespace Nop.Api.Authorization.Controllers
 
                 try
                 {
-                    // TODO: Here you should get the authorization user data from the database instead of TempData.
-                    string clientId = TempData["clientId"].ToString();
-                    string clientSecret = TempData["clientSecret"].ToString();
-                    string serverUrl = TempData["serverUrl"].ToString();
-                    string redirectUrl = TempData["redirectUrl"].ToString();
+                    // TODO: Here you should get the authorization user data from the database instead from the current Session.
+                    string clientId = Session["clientId"].ToString();
+                    string clientSecret = Session["clientSecret"].ToString();
+                    string serverUrl = Session["serverUrl"].ToString();
+                    string redirectUrl = Session["redirectUrl"].ToString();
 
                     var authParameters = new AuthParameters()
                     {
                         ClientId = clientId,
                         ClientSecret = clientSecret,
                         ServerUrl = serverUrl,
-                        RedirectUri = redirectUrl,
+                        RedirectUrl = redirectUrl,
                         GrantType = "authorization_code",
                         Code = code
                     };
@@ -102,7 +102,8 @@ namespace Nop.Api.Authorization.Controllers
                         RedirectUrl = redirectUrl
                     };
 
-                    // TODO: Here you can save your access and refresh tokens in the database. For illustration purposes we will only show them in the view.
+                    // TODO: Here you can save your access and refresh tokens in the database. For illustration purposes we will save them in the Session and show them in the view.
+                    Session["accessToken"] = authorizationModel.AccessToken;
                 }
                 catch (Exception ex)
                 {

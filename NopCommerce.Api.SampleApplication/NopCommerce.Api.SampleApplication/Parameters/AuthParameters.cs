@@ -1,4 +1,4 @@
-﻿namespace Nop.Api.Authorization.DTOs
+﻿namespace NopCommerce.Api.SampleApplication.Parameters
 {
     public class AuthParameters
     {
@@ -7,7 +7,7 @@
         public string Error { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
-        public string RedirectUri { get; set; }
+        public string RedirectUrl { get; set; }
         public string GrantType { get; set; }
     }
 }

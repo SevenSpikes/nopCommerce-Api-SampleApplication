@@ -1,4 +1,4 @@
-﻿namespace Nop.Api.Authorization.Models
+﻿namespace NopCommerce.Api.SampleApplication.Models
 {
     public class AccessModel
     {

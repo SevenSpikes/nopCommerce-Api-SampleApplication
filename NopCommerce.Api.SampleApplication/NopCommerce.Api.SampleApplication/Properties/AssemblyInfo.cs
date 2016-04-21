@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Nop.Api.Authorization")]
+[assembly: AssemblyTitle("NopCommerce.Api.SampleApplication")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Nop.Api.Authorization")]
+[assembly: AssemblyProduct("NopCommerce.Api.SampleApplication")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9f0af292-a86c-4526-a8b3-c61c825153a9")]
+[assembly: Guid("7e7b592e-6b42-4819-b6c0-1ff0ff3ce47b")]
 
 // Version information for an assembly consists of the following four values:
 //
