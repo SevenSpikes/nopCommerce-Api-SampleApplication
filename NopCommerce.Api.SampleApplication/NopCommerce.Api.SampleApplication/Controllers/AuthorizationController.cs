@@ -33,7 +33,7 @@ namespace NopCommerce.Api.SampleApplication.Controllers
                         return BadRequest();
                     }
 
-                    // TODO: For now the data is saved into the current Session, but in production environment you should replace it with your database.
+                    // For demo purposes this data is kept into the current Session, but in production environment you should keep it in your database
                     Session["clientId"] = model.ClientId;
                     Session["clientSecret"] = model.ClientSecret;
                     Session["serverUrl"] = model.ServerUrl;
