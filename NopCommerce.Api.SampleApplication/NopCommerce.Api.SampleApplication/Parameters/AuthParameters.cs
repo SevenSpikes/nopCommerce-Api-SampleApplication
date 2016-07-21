@@ -9,5 +9,6 @@
         public string ClientSecret { get; set; }
         public string RedirectUrl { get; set; }
         public string GrantType { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

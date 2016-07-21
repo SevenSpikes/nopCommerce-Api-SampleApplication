@@ -45,6 +45,25 @@ namespace NopCommerce.Api.SampleApplication.Managers
             return accessToken;
         }
 
+        public string RefreshAuthorizationData(AuthParameters authParameters)
+        {
+            if (!String.IsNullOrEmpty(authParameters.Error))
+            {
+                throw new Exception(authParameters.Error);
+            }
+
+            // make sure we have the necessary parameters
+            ValidateParameter("storeUrl", authParameters.ServerUrl);
+            ValidateParameter("clientId", authParameters.ClientId);
+            ValidateParameter("GrantType", authParameters.GrantType);
+            ValidateParameter("RefreshToken", authParameters.RefreshToken);
+
+            // get the access token
+            string accessToken = _apiAuthorizer.RefreshToken(authParameters.RefreshToken, authParameters.GrantType);
+
+            return accessToken;
+        }
+
         private void ValidateParameter(string parameterName, string parameterValue)
         {
             if (string.IsNullOrWhiteSpace(parameterValue))

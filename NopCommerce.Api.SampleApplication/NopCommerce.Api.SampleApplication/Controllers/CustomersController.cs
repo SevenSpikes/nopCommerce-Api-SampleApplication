@@ -11,8 +11,8 @@ namespace NopCommerce.Api.SampleApplication.Controllers
         {
             // TODO: Here you should get the data from your database instead of the current Session.
             // Note: This should not be done in the action! This is only for illustration purposes.
-            var accessToken = Session["accessToken"].ToString();
-            var serverUrl = Session["serverUrl"].ToString();
+            var accessToken = (Session["accessToken"] ?? TempData["accessToken"]).ToString();
+            var serverUrl = (Session["serverUrl"] ?? TempData["serverUrl"]).ToString();
 
             var nopApiClient = new ApiClient(accessToken, serverUrl);
 

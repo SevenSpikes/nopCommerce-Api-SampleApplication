@@ -76,5 +76,41 @@ namespace NopCommerce.Api.AdapterLibrary
 
             return json;
         }
+
+        public string RefreshToken(string refreshToken, string grantType)
+        {
+            string requestUriString = string.Format("{0}/api/token", _serverUrl);
+
+            string queryParameters = string.Format("client_id={0}&grant_type={1}&refresh_token={2}", _clientId, grantType, refreshToken);
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
+            httpWebRequest.Method = "POST";
+            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+
+            using (new MemoryStream())
+            {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(queryParameters);
+                    streamWriter.Close();
+                }
+            }
+
+            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            string json = string.Empty;
+
+            using (Stream responseStream = httpWebResponse.GetResponseStream())
+            {
+                if (responseStream != null)
+                {
+                    var streamReader = new StreamReader(responseStream);
+                    json = streamReader.ReadToEnd();
+                    streamReader.Close();
+                }
+            }
+
+            return json;
+        }
     }
 }

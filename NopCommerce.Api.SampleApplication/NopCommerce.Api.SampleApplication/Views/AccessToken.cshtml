@@ -4,6 +4,36 @@
     Layout = "Layout.cshtml";
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        
+        $("#refresh-token-button").click(function() {
+
+            $.get('@Url.RouteUrl("RefreshAccessToken", null, Request.Url.Scheme)', {
+
+                refreshToken: '@Model.AuthorizationModel.RefreshToken',
+                clientId: '@Model.UserAccessModel.ClientId',
+                serverUrl: $('#serverUrl').val()
+
+            }, function(data) {
+
+                var json = JSON.parse(data);
+
+                if (json) {
+
+                    $("#access-token").text(json.access_token);
+                    $("#refresh-token").text(json.refresh_token);
+                    $("#expires-in").text(json.expires_in);
+                }
+            });
+        });
+    });
+
+</script>
+
 <div>
     <h2>Access Data</h2>
     @using (Html.BeginRouteForm("Submit", FormMethod.Post))
@@ -43,7 +73,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Get Access Token" />
+                    <input type="submit" value="Get Access Token"/>
+                    <button type="button" id="refresh-token-button">Refresh Access Token</button>
                 </td>
             </tr>
         </table>
@@ -53,15 +84,15 @@
     <h2>Authorization Data</h2>
     <div>
         <h4>Access Token</h4>
-        <p>@Model.AuthorizationModel.AccessToken</p>
+        <p id="access-token">@Model.AuthorizationModel.AccessToken</p>
     </div>
     <div>
         <h4>Refresh Token</h4>
-        <p>@Model.AuthorizationModel.RefreshToken</p>
+        <p id="refresh-token">@Model.AuthorizationModel.RefreshToken</p>
     </div>
     <div>
         <h4>Access Token Expires In Seconds</h4>
-        <p>@Model.AuthorizationModel.ExpiresIn</p>
+        <p id="expires-in">@Model.AuthorizationModel.ExpiresIn</p>
     </div>
     <div>
         <h4>Token Type</h4>

@@ -17,18 +17,25 @@ namespace NopCommerce.Api.SampleApplication
            );
 
             routes.MapRoute(
-              name: "GetAccessToken",
-              url: "token",
-              defaults: new { controller = "Authorization", action = "GetAccessToken" },
-              namespaces: new string[] { "NopCommerce.Api.SampleApplication.Controllers" }
-           );
+               name: "GetAccessToken",
+               url: "token",
+               defaults: new { controller = "Authorization", action = "GetAccessToken" },
+               namespaces: new string[] { "NopCommerce.Api.SampleApplication.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "RefreshAccessToken",
+               url: "refresh_token",
+               defaults: new { controller = "Authorization", action = "RefreshAccessToken" },
+               namespaces: new string[] { "NopCommerce.Api.SampleApplication.Controllers" }
+            );
 
             routes.MapRoute(
                name: "GetCustomers",
                url: "customers",
                defaults: new { controller = "Customers", action = "GetCustomers" },
                namespaces: new string[] { "NopCommerce.Api.SampleApplication.Controllers" }
-           );
+            );
 
             routes.MapRoute(
                 name: "Default",

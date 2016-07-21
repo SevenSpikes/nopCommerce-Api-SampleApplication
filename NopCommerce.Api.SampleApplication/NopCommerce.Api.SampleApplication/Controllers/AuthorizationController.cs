@@ -116,6 +116,66 @@ namespace NopCommerce.Api.SampleApplication.Controllers
             return BadRequest();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult RefreshAccessToken(string refreshToken, string clientId, string serverUrl)
+        {
+            string json = string.Empty;
+
+            if (ModelState.IsValid &&
+                !string.IsNullOrEmpty(refreshToken) &&
+                !string.IsNullOrEmpty(clientId) &&
+                !string.IsNullOrEmpty(serverUrl))
+            {
+                var model = new AccessModel();
+
+                try
+                {
+                    var authParameters = new AuthParameters()
+                    {
+                        ClientId = clientId,
+                        ServerUrl = serverUrl,
+                        RefreshToken = refreshToken,
+                        GrantType = "refresh_token"
+                    };
+
+                    var nopAuthorizationManager = new AuthorizationManager(authParameters.ClientId,
+                        authParameters.ClientSecret, authParameters.ServerUrl);
+
+                    string responseJson = nopAuthorizationManager.RefreshAuthorizationData(authParameters);
+
+                    AuthorizationModel authorizationModel =
+                        JsonConvert.DeserializeObject<AuthorizationModel>(responseJson);
+
+                    model.AuthorizationModel = authorizationModel;
+                    model.UserAccessModel = new UserAccessModel()
+                    {
+                        ClientId = clientId,
+                        ServerUrl = serverUrl
+                    };
+
+                    // Here we use the temp data because this method is called via ajax and here we can't hold a session.
+                    // This is needed for the GetCustomers method in the CustomersController.
+                    TempData["accessToken"] = authorizationModel.AccessToken;
+                    TempData["serverUrl"] = serverUrl;
+                }
+                catch (Exception ex)
+                {
+                    json = string.Format("error: '{0}'", ex.Message);
+
+                    return Json(json, JsonRequestBehavior.AllowGet);
+                }
+
+                json = JsonConvert.SerializeObject(model.AuthorizationModel);
+            }
+            else
+            {
+                json = "error: 'something went wrong'";
+            }
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
         private ActionResult BadRequest(string message = "Bad Request")
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
