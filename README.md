@@ -1,4 +1,4 @@
-# nopCommerce Api SampleApplication
+# nopCommerce Api Sample Client Application
 
 In this sample project we have demonstrated how clients can authorize and obtain **Access/Refresh tokens** that can be used to access the [nopCommerce Web API](https://github.com/SevenSpikes/api-plugin-for-nopcommerce), which is available as a plugin and provides a **RESTful API** to various resources in nopCommerce i.e Customers, Categories, Products, Shopping Cart Items, Orders.
 
