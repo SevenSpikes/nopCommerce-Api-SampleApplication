@@ -21,3 +21,24 @@ Here is how the Authorization Code Grant Flow works.
 
 5. The client application uses the **access token** to authenticate to the Web API every time it makes request to access its resources.
 
+How to use the client application.
+---------------------------------------------------------------------------
+
+1. Open the solution (NopCommerce.Api.SampleApplication.sln) and run it.
+
+2. It will start a website that will prompt you for **Server url**, **Client Id** and **Client Secret**, which you need manually populate a bit later. The **Redirect url** will be automatically populated with the url of your sample website so you don't have to change it.
+
+3. Run your nopCommerce website with the Api plugin installed. Copy the nopCommerce website url and use it for the **Server url**.
+
+4. Create a new Api client from the Api plugin administration and give it some name i.e **Sample Client**.
+
+5. The Client Id and Client Secret will be automatically generated for you so you just need to copy and use them into the Sample Application.
+
+6. Now copy the Redirect Url from the Sample Application and set it to the client's Callback Url and Save the client.
+
+7. Now when you click on Get Access Token in the Sample Application you will be able to obtain an Access Token that you can use to access resources in your nopCommerce store.
+
+8. We have created a Get Customers link that will use the Access Token to retrieve the customers from the nopCommerce store.
+
+
+
