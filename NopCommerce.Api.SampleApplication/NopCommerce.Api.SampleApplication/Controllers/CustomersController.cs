@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 using NopCommerce.Api.AdapterLibrary;
 using NopCommerce.Api.SampleApplication.DTOs;
@@ -20,8 +21,11 @@ namespace NopCommerce.Api.SampleApplication.Controllers
             object customersData = nopApiClient.Get(jsonUrl);
 
             var customersRootObject = JsonConvert.DeserializeObject<CustomersRootObject>(customersData.ToString());
-            
-            return View("~/Views/Customers.cshtml", customersRootObject);
+
+            var customers = customersRootObject.Customers.Where(
+                customer => !string.IsNullOrEmpty(customer.FirstName) || !string.IsNullOrEmpty(customer.LastName));
+
+            return View("~/Views/Customers.cshtml", customers);
         }
     }
 }

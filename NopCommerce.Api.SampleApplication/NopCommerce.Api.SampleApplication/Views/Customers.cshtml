@@ -1,11 +1,11 @@
-﻿@model NopCommerce.Api.SampleApplication.DTOs.CustomersRootObject
+﻿@model IEnumerable<NopCommerce.Api.SampleApplication.DTOs.CustomerApi>
 
 @{
     Layout = "Layout.cshtml";
 }
 
 <ul>
-    @foreach (var customer in Model.Customers)
+    @foreach (var customer in Model)
     {
         <li>@customer.FirstName @customer.LastName</li>     
     }

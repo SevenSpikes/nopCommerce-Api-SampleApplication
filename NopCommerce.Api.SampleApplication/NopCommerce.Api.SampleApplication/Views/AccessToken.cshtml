@@ -44,7 +44,7 @@
                     <label for="serverUrl">Server url</label>
                 </td>
                 <td>
-                    <input name="serverUrl" type="text" id="serverUrl" value="@Model.UserAccessModel.ServerUrl" />
+                    <input name="serverUrl" type="text" id="serverUrl" value="@Model.UserAccessModel.ServerUrl" style="width:400px"/>
                 </td>
             </tr>
             <tr>
@@ -52,7 +52,7 @@
                     <label for="clientId">Client Id</label>
                 </td>
                 <td>
-                    <input name="clientId" type="text" id="clientId" value="@Model.UserAccessModel.ClientId" />
+                    <input name="clientId" type="text" id="clientId" value="@Model.UserAccessModel.ClientId" style="width:400px"/>
                 </td>
             </tr>
             <tr>
@@ -60,7 +60,7 @@
                     <label for="clientSecret">Client Secret</label>
                 </td>
                 <td>
-                    <input name="clientSecret" type="text" id="clientSecret" value="@Model.UserAccessModel.ClientSecret" />
+                    <input name="clientSecret" type="text" id="clientSecret" value="@Model.UserAccessModel.ClientSecret" style="width:400px"/>
                 </td>
             </tr>
             <tr>
@@ -68,7 +68,7 @@
                     <label for="redirectUrl">Redirect Url</label>
                 </td>
                 <td>
-                    <input name="redirectUrl" type="text" id="redirectUrl" value="@Url.RouteUrl("GetAccessToken", null, Request.Url.Scheme)" readonly="readonly" value="@Model.UserAccessModel.RedirectUrl" />
+                    <input name="redirectUrl" type="text" id="redirectUrl" value="@Url.RouteUrl("GetAccessToken", null, Request.Url.Scheme)" readonly="readonly" value="@Model.UserAccessModel.RedirectUrl" style="width:400px"/>
                 </td>
             </tr>
             <tr>
