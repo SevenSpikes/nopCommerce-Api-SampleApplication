@@ -38,6 +38,13 @@ namespace NopCommerce.Api.SampleApplication
             );
 
             routes.MapRoute(
+               name: "UpdateCustomer",
+               url: "updatecustomer/{customerId}",
+               defaults: new { controller = "Customers", action = "UpdateCustomer", customerId = UrlParameter.Optional },
+               namespaces: new string[] { "NopCommerce.Api.SampleApplication.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Authorization", action = "Index", id = UrlParameter.Optional },

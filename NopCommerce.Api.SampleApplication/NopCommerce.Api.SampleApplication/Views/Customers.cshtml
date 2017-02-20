@@ -7,6 +7,6 @@
 <ul>
     @foreach (var customer in Model)
     {
-        <li>@customer.FirstName @customer.LastName</li>     
+        <li>@customer.FirstName @customer.LastName - <a href="/UpdateCustomer/@customer.Id">Reset Last Name</a></li>     
     }
 </ul>
