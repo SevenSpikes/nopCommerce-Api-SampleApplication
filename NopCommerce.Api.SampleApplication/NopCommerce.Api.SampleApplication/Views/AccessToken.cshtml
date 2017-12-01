@@ -9,13 +9,18 @@
 <script>
 
     $(document).ready(function() {
-        
+
+        var refreshToken = '@Model.AuthorizationModel.RefreshToken';
+        var clientId = '@Model.UserAccessModel.ClientId';
+        var clientSecret = '@Model.UserAccessModel.ClientSecret';
+
         $("#refresh-token-button").click(function() {
 
             $.get('@Url.RouteUrl("RefreshAccessToken", null, Request.Url.Scheme)', {
 
-                refreshToken: '@Model.AuthorizationModel.RefreshToken',
-                clientId: '@Model.UserAccessModel.ClientId',
+                refreshToken: refreshToken,
+                clientId: clientId,
+                clientSecret: clientSecret,
                 serverUrl: $('#serverUrl').val()
 
             }, function(data) {
@@ -24,8 +29,10 @@
 
                 if (json) {
 
+                    refreshToken = json.refresh_token;
+
                     $("#access-token").text(json.access_token);
-                    $("#refresh-token").text(json.refresh_token);
+                    $("#refresh-token").text(refreshToken);
                     $("#expires-in").text(json.expires_in);
                 }
             });

@@ -43,7 +43,7 @@ namespace NopCommerce.Api.SampleApplication.Controllers
                     var state = Guid.NewGuid();
                     Session["state"] = state;
 
-                    string authUrl = nopAuthorizationManager.BuildAuthUrl(redirectUrl, new string[] { }, state.ToString());
+                    string authUrl = nopAuthorizationManager.BuildAuthUrl(redirectUrl, new string[] { "nop_api" }, state.ToString());
 
                     return Redirect(authUrl);
                 }
@@ -58,7 +58,7 @@ namespace NopCommerce.Api.SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult GetAccessToken(string code, string state)
+        public ActionResult GetAccessToken(string code, string state, string error, string errorDescription)
         {
             if (ModelState.IsValid && !string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(state))
             {
@@ -118,14 +118,15 @@ namespace NopCommerce.Api.SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult RefreshAccessToken(string refreshToken, string clientId, string serverUrl)
+        public JsonResult RefreshAccessToken(string refreshToken, string clientId, string clientSecret, string serverUrl)
         {
             string json = string.Empty;
 
             if (ModelState.IsValid &&
                 !string.IsNullOrEmpty(refreshToken) &&
                 !string.IsNullOrEmpty(clientId) &&
-                !string.IsNullOrEmpty(serverUrl))
+                !string.IsNullOrEmpty(serverUrl) &&
+                !string.IsNullOrEmpty(clientSecret))
             {
                 var model = new AccessModel();
 
@@ -136,7 +137,8 @@ namespace NopCommerce.Api.SampleApplication.Controllers
                         ClientId = clientId,
                         ServerUrl = serverUrl,
                         RefreshToken = refreshToken,
-                        GrantType = "refresh_token"
+                        GrantType = "refresh_token",
+                        ClientSecret = clientSecret
                     };
 
                     var nopAuthorizationManager = new AuthorizationManager(authParameters.ClientId,
