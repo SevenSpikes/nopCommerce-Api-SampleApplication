@@ -22,7 +22,7 @@ namespace NopCommerce.Api.AdapterLibrary
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendFormat("{0}/connect/authorize", _serverUrl);
+            stringBuilder.AppendFormat("{0}/oauth/authorize", _serverUrl);
             stringBuilder.AppendFormat("?client_id={0}", HttpUtility.UrlEncode(_clientId));
             stringBuilder.AppendFormat("&redirect_uri={0}", HttpUtility.UrlEncode(redirectUrl));
             stringBuilder.Append("&response_type=code");
@@ -44,7 +44,7 @@ namespace NopCommerce.Api.AdapterLibrary
 
         public string AuthorizeClient(string code, string grantType, string redirectUrl)
         {
-            string requestUriString = string.Format("{0}/connect/token", _serverUrl);
+            string requestUriString = string.Format("{0}/oauth/token", _serverUrl);
 
             string queryParameters = string.Format("client_id={0}&client_secret={1}&code={2}&grant_type={3}&redirect_uri={4}", _clientId, _clientSecret, code, grantType, redirectUrl);
 
@@ -80,7 +80,7 @@ namespace NopCommerce.Api.AdapterLibrary
 
         public string RefreshToken(string refreshToken, string grantType)
         {
-            string requestUriString = string.Format("{0}/connect/token", _serverUrl);
+            string requestUriString = string.Format("{0}/oauth/token", _serverUrl);
 
             string queryParameters = string.Format("client_id={0}&client_secret={1}&grant_type={2}&refresh_token={3}", _clientId, _clientSecret, grantType, refreshToken);
 
