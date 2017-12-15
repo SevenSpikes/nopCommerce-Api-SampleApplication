@@ -35,8 +35,7 @@ namespace NopCommerce.Api.AdapterLibrary
             if (scope != null && scope.Length > 0)
             {
                 string scopeJoined = string.Join(",", scope);
-                // offline_access scope is needed for obtaining the refresh token.
-                stringBuilder.AppendFormat("&scope={0} offline_access", HttpUtility.UrlEncode(scopeJoined));
+                stringBuilder.AppendFormat("&scope={0}", HttpUtility.UrlEncode(scopeJoined));
             }
 
             return stringBuilder.ToString();
