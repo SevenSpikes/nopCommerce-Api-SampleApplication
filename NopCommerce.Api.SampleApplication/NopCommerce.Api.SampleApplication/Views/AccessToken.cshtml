@@ -9,13 +9,18 @@
 <script>
 
     $(document).ready(function() {
-        
-        $("#refresh-token-button").click(function() {
 
+        var clientId = '@Model.UserAccessModel.ClientId';
+        var clientSecret = '@Model.UserAccessModel.ClientSecret';
+
+        $("#refresh-token-button").click(function () {
+            
+            var refreshToken = $("#refresh-token")[0].innerText;
             $.get('@Url.RouteUrl("RefreshAccessToken", null, Request.Url.Scheme)', {
 
-                refreshToken: '@Model.AuthorizationModel.RefreshToken',
-                clientId: '@Model.UserAccessModel.ClientId',
+                refreshToken: refreshToken,
+                clientId: clientId,
+                clientSecret: clientSecret,
                 serverUrl: $('#serverUrl').val()
 
             }, function(data) {

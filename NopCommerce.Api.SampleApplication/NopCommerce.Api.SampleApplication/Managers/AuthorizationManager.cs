@@ -55,6 +55,7 @@ namespace NopCommerce.Api.SampleApplication.Managers
             // make sure we have the necessary parameters
             ValidateParameter("storeUrl", authParameters.ServerUrl);
             ValidateParameter("clientId", authParameters.ClientId);
+            ValidateParameter("clientSecret", authParameters.ClientSecret);
             ValidateParameter("GrantType", authParameters.GrantType);
             ValidateParameter("RefreshToken", authParameters.RefreshToken);
 

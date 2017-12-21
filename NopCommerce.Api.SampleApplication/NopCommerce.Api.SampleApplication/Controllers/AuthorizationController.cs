@@ -118,13 +118,14 @@ namespace NopCommerce.Api.SampleApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult RefreshAccessToken(string refreshToken, string clientId, string serverUrl)
+        public JsonResult RefreshAccessToken(string refreshToken, string clientId, string clientSecret, string serverUrl)
         {
             string json = string.Empty;
 
             if (ModelState.IsValid &&
                 !string.IsNullOrEmpty(refreshToken) &&
                 !string.IsNullOrEmpty(clientId) &&
+                 !string.IsNullOrEmpty(clientSecret) &&
                 !string.IsNullOrEmpty(serverUrl))
             {
                 var model = new AccessModel();
@@ -134,6 +135,7 @@ namespace NopCommerce.Api.SampleApplication.Controllers
                     var authParameters = new AuthParameters()
                     {
                         ClientId = clientId,
+                        ClientSecret = clientSecret,
                         ServerUrl = serverUrl,
                         RefreshToken = refreshToken,
                         GrantType = "refresh_token"

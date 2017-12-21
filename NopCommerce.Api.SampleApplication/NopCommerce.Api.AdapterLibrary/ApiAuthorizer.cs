@@ -81,7 +81,7 @@ namespace NopCommerce.Api.AdapterLibrary
         {
             string requestUriString = string.Format("{0}/api/token", _serverUrl);
 
-            string queryParameters = string.Format("client_id={0}&grant_type={1}&refresh_token={2}", _clientId, grantType, refreshToken);
+            string queryParameters = string.Format("client_id={0}&client_secret={1}&grant_type={2}&refresh_token={3}", _clientId, _clientSecret, grantType, refreshToken);
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
             httpWebRequest.Method = "POST";
